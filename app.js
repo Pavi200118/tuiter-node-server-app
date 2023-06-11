@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(
 cors({
    credentials: true,
-   origin: "https://pavithrasowmiyan-cs5610-a4.netlify.app",
+   origin: "http://localhost:3000",
 })
 );
 
