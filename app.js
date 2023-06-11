@@ -7,16 +7,6 @@ import UserController from "./users/users-controller.js";
 import TuitsController from "./controllers/tuits/tuits-controller.js";
 
 const app = express();
-
-app.use(
-cors({
-   credentials: true,
-   origin: "http://localhost:3000",
-
-})
-);
-app.use(express.json());
-
 app.use(
   session({
     secret: "any string",
@@ -24,11 +14,17 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(
+cors({
+   credentials: true,
+   origin: "https://pavithrasowmiyan-cs5610-a4.netlify.app",
+})
+);
+app.use(express.json());
 
+const port = process.env.PORT || 4000;
 TuitsController(app);
 HelloController(app);
 UserController(app);
 AuthController(app);
-
-app.listen(4000);
-
+app.listen(process.env.PORT || 4000);
