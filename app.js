@@ -14,17 +14,17 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(express.json());
 app.use(
 cors({
    credentials: true,
    origin: "https://pavithrasowmiyan-cs5610-a4.netlify.app",
 })
 );
-app.use(express.json());
 
-const port = process.env.PORT || 4000;
+
 TuitsController(app);
 HelloController(app);
 UserController(app);
 AuthController(app);
-app.listen(process.env.PORT || 4000);
+app.listen(4000);
