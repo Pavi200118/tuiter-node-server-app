@@ -1,10 +1,7 @@
 
-/* let users = []; */
 import people from './users.js'
 
 let users = people
-
-
 export const findAllUsers = () => users;
 
 
