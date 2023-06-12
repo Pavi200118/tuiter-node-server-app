@@ -20,13 +20,13 @@ const deleteUser = (req, res) => {
 }
 const updateUser = (req, res) => {
  const userId = req.params['uid'];
- const updates = req.body;
- users = users.map((usr) =>
-   usr._id === userId ?
-     {...usr, ...updates} :
-     usr
- );
- res.sendStatus(200);
+     const updates = req.body;
+
+     const newUser = await usersDao.updateUser(userId, updates)
+     req.session['currentUser'] = newUser;
+
+
+     res.sendStatus(200);
 }
 const findUserById = (req, res) => {
   const userId = req.params.uid;
