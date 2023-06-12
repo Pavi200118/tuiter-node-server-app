@@ -7,18 +7,18 @@ const UserController = (app) => {
    app.delete('/api/users/:uid', deleteUser);
     app.put('/api/users/:uid', updateUser);
    }
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
   const newUser = req.body;
   newUser._id = (new Date()).getTime() + '';
   users.push(newUser);
   res.json(newUser);
 }
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
   const userId = req.params['uid'];
   users = users.filter(usr => usr._id !== userId);
   res.sendStatus(200);
 }
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
  const userId = req.params['uid'];
      const updates = req.body;
 
@@ -28,21 +28,17 @@ const updateUser = (req, res) => {
 
      res.sendStatus(200);
 }
-const findUserById = (req, res) => {
+const findUserById = async (req, res) => {
   const userId = req.params.uid;
   const user = users
     .find(u => u._id === userId);
   res.json(user);
 }
-const findUsers = (req, res) => {
-   const type = req.query.type
-    if(type) {
-    const usersOfType = users
-      .filter(u => u.type === type)
-    res.json(usersOfType)
-    return
-  }
-   res.json(users)
+const findUsers = async (req, res) => {
+   const users = await usersDao.findAllUsers();
+
+
+       res.json(users)
 }
 export default UserController
 
