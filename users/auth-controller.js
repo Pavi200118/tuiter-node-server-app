@@ -28,6 +28,7 @@ const AuthController = (app) => {
 
     const profile = async (req, res) => {
         const currentUser = currentUserVar
+
         if (!currentUser) {
             res.sendStatus(404);
             return;
