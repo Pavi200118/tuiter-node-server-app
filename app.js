@@ -1,8 +1,7 @@
 import express from 'express'
 import mongoose from "mongoose";
 
-const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/tuiter'
-mongoose.connect(CONNECTION_STRING);
+
 import HelloController from "./controllers/hello-controller.js"
 import UserController from "./users/users-controller.js"
 import TuitsController from "./controllers/tuits/tuits-controller.js";
@@ -35,7 +34,9 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-const port = process.env.PORT || 4000;
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/tuiter'
+mongoose.connect(CONNECTION_STRING);
+
 TuitsController(app);
 HelloController(app);
 UserController(app);
