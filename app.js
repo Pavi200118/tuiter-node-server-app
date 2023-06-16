@@ -1,45 +1,42 @@
-import express from 'express'
-import mongoose from "mongoose";
-
-
-import HelloController from "./controllers/hello-controller.js"
-import UserController from "./users/users-controller.js"
-import TuitsController from "./controllers/tuits/tuits-controller.js";
-import cors from 'cors';
+import express from "express";
 import session from "express-session";
+import cors from "cors";
 import AuthController from "./users/auth-controller.js";
-
+import HelloController from "./controllers/hello-controller.js";
+import UserController from "./users/users-controller.js";
+import TuitsController from "./controllers/tuits/tuits-controller.js";
+import mongoose from "mongoose";
+const CONNECTION_STRING =
+  process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/tuiter";
+mongoose.connect(CONNECTION_STRING);
 const app = express();
 app.use(
-    session({
-        secret: "any string",
-        resave: false,
-        saveUninitialized: true,
-        store: new session.MemoryStore(),
-    })
+  session({
+    secret: "any string",
+    resave: false,
+    saveUninitialized: true,
+    store: new session.MemoryStore(),
+  })
 );
 
-app.use((req, res, next) => {
-    const allowedOrigins = ["http://localhost:3000", "https://tuiter-node-server-app-a6-cskh.onrender.com",
-    "https://charming-boba-1cddcf.netlify.app"];
-    const origin = req.headers.origin;
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://charming-boba-1cddcf.netlify.app",
+  "https://tuiter-node-server-app-a6-cskh.onrender.com",
+];
 
-    if (allowedOrigins.includes(origin)) {
-        res.header("Access-Control-Allow-Origin", origin);
-    }
-
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH, OPTIONS");
-    res.header("Access-Control-Allow-Credentials", "true");
-    next();
-});
+app.use(
+  cors({
+    credentials: true,
+    origin: allowedOrigins,
+  })
+);
 
 app.use(express.json());
-const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/tuiter'
-mongoose.connect(CONNECTION_STRING);
 
 TuitsController(app);
 HelloController(app);
 UserController(app);
 AuthController(app);
-app.listen(process.env.PORT || 4000);
+
+app.listen(4000);
