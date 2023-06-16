@@ -21,7 +21,7 @@ app.use(
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://charming-boba-1cddcf.netlify.app",
+  "https://pavithrasowmiyan-cs5610-a6.netlify.app",
   "https://tuiter-node-server-app-a6-cskh.onrender.com",
 ];
 
