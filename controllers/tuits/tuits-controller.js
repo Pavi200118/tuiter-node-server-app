@@ -7,7 +7,7 @@ const createTuit = async (req, res) => {
   newTuit.likes = 0;
   newTuit.liked = false;
   newTuit.topic =  "Nasa",
-  ewTuit.username = "@nasa",
+  newTuit.username = "@nasa",
   newTuit.dislikes = 0;
   newTuit.image = "nasa.png";
   newTuit.time = "Now";
