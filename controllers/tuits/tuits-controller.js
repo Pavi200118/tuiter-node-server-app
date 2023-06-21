@@ -25,7 +25,7 @@ const tuits = await tuitsDao.findTuits()
 res.json(tuits);
 }
 const updateTuit = async (req, res) => {
-  const tuitdId = req.params.tid;
+  const tuitdIdToUpdate = req.params.tid;
   const updates = req.body;
   const status = await tuitsDao.updateTuit(tuitdIdToUpdate, updates);
 console.log(status)
