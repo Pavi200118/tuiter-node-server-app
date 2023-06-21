@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const schema = mongoose.Schema({
   likes: String,
   liked: String,
-  dislikes: Int32,
+  dislikes: Number,
       topic: String,
       username: String,
       handle: String,
